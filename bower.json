@@ -1,0 +1,22 @@
+{
+  "name": "curl-builder",
+  "homepage": "https://github.com/ScottNeaves/curl-builder",
+  "authors": [
+    "Scott Neaves <scottneaves2014@u.northwestern.edu>"
+  ],
+  "description": "builds curl commands",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "^3.4.0"
+  }
+}
