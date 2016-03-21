@@ -40,7 +40,7 @@
      </div>
 
      <div class="row">
-       <div class=" form-group col-xs-3">
+       <div class=" form-group col-md-3">
          <h3>Data</h3>
          <div class="checkbox">
           <label>
@@ -52,23 +52,26 @@
      </div>
 
      <div class="row">
-       <div class="form-group col-xs-3">
+       <div class="form-group col-md-3">
          <h3>Method</h3>
-           <div class="btn-group">
-             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              POST <span class="caret"></span>
-             </button>
-             <ul class="dropdown-menu">
-               <li><a href="#">PUT</a></li>
-               <li><a href="#">GET</a></li>
-               <li><a href="#">DELETE</a></li>
-             </ul>
-           </div>
-         <div>
-           <label for="value" class="sr-only"></label>
-           <input id="URL" class="form-control input-group-lg reg_name" type="text" name="URL"
-                  title="Enter a URL"
-                  placeholder="URL"/>
+         <div class="btn-group">
+           <button type="button" class="btn btn-default">POST</button>
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <span class="caret"></span>
+             <span class="sr-only">Toggle Dropdown</span>
+           </button>
+           <ul class="dropdown-menu">
+             <li><a href="#">POST</a></li>
+             <li><a href="#">PUT</a></li>
+             <li><a href="#">GET</a></li>
+             <li><a href="#">DELETE</a></li>
+           </ul>
+         </div>
+
+         <label for="value" class="sr-only"></label>
+         <input id="URL" class="form-control input-group-lg reg_name" type="text" name="URL"
+                title="Enter a URL"
+                placeholder="URL"/>
          </div>
        </div>
      </div>
