@@ -17,6 +17,70 @@
 <body class="container">
   <h1 class="well">Curl Builder</h1>
   <h3>Headers</h3>
+  <form name="curlBuilder" id='headers' class="form-inline">
+     <div class="row">
+       <div class="form-group col-xs-3">
+           <label for="key" class="sr-only">Key</label>
+           <input id="key" class="form-control input-group-lg reg_name" type="text" name="key"
+                  title="Enter a key"
+                  placeholder="Key"/>
+       </div>
+       <div class="form-group col-xs-3">
+           <label for="value" class="sr-only"></label>
+           <input id="value" class="form-control input-group-lg reg_name" type="text" name="value"
+                  title="Enter a value"
+                  placeholder="value"/>
+       </div>
+       <div class="form-group col-xs-3">
+           <label for="Select Method" class="sr-only"></label>
+           <input id="remove" type="button" class="form-control input-group-lg reg_name" name="remove"
+                  title="Remove key/value pair" value="Remove"
+                  placeholder="remove"/>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class=" form-group col-xs-3">
+         <h3>Data</h3>
+         <div class="checkbox">
+          <label>
+            <input type="checkbox"> JSON?
+          </label>
+        </div>
+        <textarea class="form-control" rows="3"></textarea>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="form-group col-xs-3">
+         <h3>Method</h3>
+           <div class="btn-group">
+             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              POST <span class="caret"></span>
+             </button>
+             <ul class="dropdown-menu">
+               <li><a href="#">PUT</a></li>
+               <li><a href="#">GET</a></li>
+               <li><a href="#">DELETE</a></li>
+             </ul>
+           </div>
+         <div>
+           <label for="value" class="sr-only"></label>
+           <input id="URL" class="form-control input-group-lg reg_name" type="text" name="URL"
+                  title="Enter a URL"
+                  placeholder="URL"/>
+         </div>
+       </div>
+     </div>
+
+     <div class="row">
+       <div class="form-group col-md-3">
+         <h3>Curl Command</h3>
+         <textarea class="form-control" rows="3"></textarea>
+      </div>
+    </div>
+
+ </form>
 
 </body>
 </html>
