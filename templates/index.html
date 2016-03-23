@@ -9,6 +9,7 @@
   <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../static/js/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
@@ -73,10 +74,18 @@
     <div class="row">
       <div class="form-group col-xs-12">
         <h3>Curl Command</h3>
-        <textarea class="form-control" rows="3"></textarea>
+        <button id="copybutton" class="btn btn-sm copybtn" data-clipboard-target="#curlcmd">Copy to Clipboard</button>
+        <textarea id="curlcmd" class="form-control" rows="3"></textarea>
       </div>
     </div>
   </div>
 </body>
+
+<script>
+var copybutton = $("#copybutton")
+var btns = new Clipboard('.copybtn');
+
+</script>
+
 
 </html>

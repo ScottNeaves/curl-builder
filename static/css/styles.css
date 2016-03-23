@@ -1,3 +1,23 @@
-h1 {
-    background-color: green;
+body{
+  background-color: #588C7E
+}
+
+.well{
+  background-color: #F2AE72
+}
+
+h1, h2, h3{
+  color: black;
+}
+
+.btn{
+  background-color: #D96459
+}
+
+.btn:hover{
+  background-color: #F2E394
+}
+
+#copybutton{
+  float:right;
 }
