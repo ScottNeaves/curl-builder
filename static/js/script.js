@@ -1,7 +1,8 @@
 // Class to represent a row in the seat reservations grid
-function KeyValue(name, initialMeal) {
+function KeyValue(myKey, myValue) {
     var self = this;
-    self.name = name;
+    self.myKey=myKey;
+    self.myValue=myValue;
 }
 // Overall viewmodel for this screen, along with initial state
 function KVPairsViewModel() {
