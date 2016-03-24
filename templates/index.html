@@ -10,6 +10,7 @@
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../static/js/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
+  <script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js'></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
@@ -30,7 +31,7 @@
               <input class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
             </div>
             <div class="form-group col-xs-3 col-md-2">
-              <button class="form-control btn btn-default" name="remove" value="Remove"/>Remove</button>
+              <button class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
             </div>
           </div>
       </div>
@@ -79,12 +80,14 @@
       </div>
     </div>
   </div>
+
+  <p>First name: <strong data-bind="text: firstName"></strong></p>
+  <p>Last name: <strong data-bind="text: lastName"></strong></p>
+
 </body>
 
 <script>
-var copybutton = $("#copybutton")
-var btns = new Clipboard('.copybtn');
-
+  var clipboard = new Clipboard('.copybtn');
 </script>
 
 
