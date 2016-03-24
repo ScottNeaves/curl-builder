@@ -8,9 +8,7 @@
   <!-- scripts -->
   <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../static/js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
-  <script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js'></script>
+  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
@@ -32,6 +30,11 @@
             </div>
             <div class="form-group col-xs-3 col-md-2">
               <button class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-2">
+              <button class="form-control btn btn-sm" name="addAnother" value="addAnother" />Add Another</button>
             </div>
           </div>
       </div>
@@ -81,9 +84,29 @@
     </div>
   </div>
 
-  <p>First name: <strong data-bind="text: firstName"></strong></p>
-  <p>Last name: <strong data-bind="text: lastName"></strong></p>
+  <!--KNOCKOUT LIST EXAMPLE-->
+  <h2>Your seat reservations</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Headers</th>
+      </tr>
+    </thead>
+    <tbody data-bind="foreach: pairs">
+      <tr>
+        <td>
+          <input data-bind="value: name"/>
+        </td>
+        <td><a href="#" data-bind="click: $root.removePair">Remove</a></td>
+      </tr>
+    </tbody>
+  </table>
+  <button data-bind="click: addKVPair">Add Another</button>
+  <!--END KNOCKOUT LIST EXAMPLE-->
 
+
+  <script src="../static/bower_components/knockout/dist/knockout.js"></script>
+  <script src="../static/js/script.js"></script>
 </body>
 
 <script>
