@@ -9,6 +9,7 @@
   <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
@@ -53,13 +54,13 @@
               <tbody data-bind="foreach: pairs" />
               <tr>
                 <td class="form-group col-xs-5 col-md-5">
-                    <input data-bind="value: myKey" class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
+                  <input id="KeyGuess" data-bind="value: myKey, valueUpdate:'blur'" class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
                 </td>
-                <td  class="form-group col-xs-4 col-md-5">
-                    <input data-bind="value:myValue" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
+                <td class="form-group col-xs-4 col-md-5">
+                  <input data-bind="value:myValue" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
                 </td>
                 <td class="form-group col-xs-3 col-md-2">
-                    <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
+                  <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
                 </td>
               </tr>
               </tbody>
