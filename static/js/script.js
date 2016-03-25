@@ -642,40 +642,6 @@
 
 
 
-// Class to represent a row in the seat reservations grid
-
-$(function() {
-   var availableTags = [
-     "ActionScript",
-     "AppleScript",
-     "Asp",
-     "BASIC",
-     "C",
-     "C++",
-     "Clojure",
-     "COBOL",
-     "ColdFusion",
-     "Erlang",
-     "Fortran",
-     "Groovy",
-     "Haskell",
-     "Java",
-     "JavaScript",
-     "Lisp",
-     "Perl",
-     "PHP",
-     "Python",
-     "Ruby",
-     "Scala",
-     "Scheme"
-   ];
-   $( "#KeyGuess" ).autocomplete({
-     source: availableTags
-   });
- });
-
-
-
 function KeyValue(myKey, myValue) {
     var self = this;
     self.myKey=myKey;
@@ -690,31 +656,36 @@ function KVPairsViewModel() {
         new KeyValue("")
     ]);
 
-    self.keywords = ko.observableArray([
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
+    self.pets = ko.observableArray([
+      "Dog",
+      "Cat",
+      "Bird",
+      "Hamster"
     ])
 
+    self.breeds = ko.observableArray([
+      "Terrier",
+      "Schnauzer",
+      "Great Dane",
+      "Beagle",
+
+      "Tabby",
+      "Siamese",
+      "Garfield",
+
+      "Parrot",
+      "Sparrow",
+      "Peregrin Falcon",
+      "Hawk",
+
+      "Weebly",
+      "Woobly",
+      "Feeny"
+    ])
+
+    self.dependentForm = function() {
+      
+    }
     // Operations
     self.addKVPair = function() {
         self.pairs.push(new KeyValue(""));
