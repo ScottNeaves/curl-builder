@@ -8,39 +8,16 @@
   <!-- scripts -->
   <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" href="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.css">
 </head>
 
 <body class="container">
   <h1 class="well">Curl Builder</h1>
   <div class="well">
-
-    <!--KNOCKOUT LIST EXAMPLE
-    <table>
-      <thead>
-        <tr>
-          <th>Headers</th>
-        </tr>
-      </thead>
-      <tbody data-bind="foreach: pairs">
-        <tr>
-          <td>
-            <input data-bind="value: myKey" />
-          </td>
-          <td>
-            <input data-bind="value: myValue" />
-          </td>
-          <td><a href="#" data-bind="click: $root.removePair">Remove</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <button data-bind="click: addKVPair">Add Another</button>
-    END KNOCKOUT LIST EXAMPLE-->
-
     <div class="row">
       <div class="form-group col-xs-12">
         <form name="curlBuilder">
@@ -57,7 +34,7 @@
                   <input id="KeyGuess" data-bind="value: myKey, valueUpdate:'blur'" class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
                 </td>
                 <td class="form-group col-xs-4 col-md-5">
-                  <input data-bind="value:myValue" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
+                  <input id="ValueGuess" data-bind="autocomplete: {data: $root.keywords, maxItems: 6 }" value="" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
                 </td>
                 <td class="form-group col-xs-3 col-md-2">
                   <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
@@ -118,13 +95,15 @@
     </div>
   </div>
 
+  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
   <script src="../static/bower_components/knockout/dist/knockout.js"></script>
   <script src="../static/js/script.js"></script>
+  <script src="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.js"></script>
+
 </body>
 
 <script>
   var clipboard = new Clipboard('.copybtn');
 </script>
-
 
 </html>
