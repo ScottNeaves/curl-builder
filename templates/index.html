@@ -8,9 +8,8 @@
   <!-- scripts -->
   <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../static/js/script.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.8/clipboard.min.js"></script>
-  <script src='http://ajax.aspnetcdn.com/ajax/knockout/knockout-3.3.0.js'></script>
+  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
@@ -19,19 +18,57 @@
 <body class="container">
   <h1 class="well">Curl Builder</h1>
   <div class="well">
+
+    <!--KNOCKOUT LIST EXAMPLE
+    <table>
+      <thead>
+        <tr>
+          <th>Headers</th>
+        </tr>
+      </thead>
+      <tbody data-bind="foreach: pairs">
+        <tr>
+          <td>
+            <input data-bind="value: myKey" />
+          </td>
+          <td>
+            <input data-bind="value: myValue" />
+          </td>
+          <td><a href="#" data-bind="click: $root.removePair">Remove</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <button data-bind="click: addKVPair">Add Another</button>
+    END KNOCKOUT LIST EXAMPLE-->
+
     <div class="row">
       <div class="form-group col-xs-12">
-        <h3>Headers</h3>
-        <form name="curlBuilder" id='haders'>
+        <form name="curlBuilder">
           <div class="row">
-            <div class="form-group col-xs-5 col-md-5">
-              <input class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
-            </div>
-            <div class="form-group col-xs-4 col-md-5">
-              <input class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
-            </div>
-            <div class="form-group col-xs-3 col-md-2">
-              <button class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
+            <table>
+              <thead>
+                <tr>
+                  <h3>Headers</h3>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach: pairs" />
+              <tr>
+                <td class="form-group col-xs-5 col-md-5">
+                  <input id="KeyGuess" data-bind="value: myKey, valueUpdate:'blur'" class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
+                </td>
+                <td class="form-group col-xs-4 col-md-5">
+                  <input data-bind="value:myValue" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
+                </td>
+                <td class="form-group col-xs-3 col-md-2">
+                  <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-2">
+              <button data-bind="click: addKVPair" class="form-control btn btn-sm" name="addAnother" value="addAnother" />Add Another</button>
             </div>
           </div>
       </div>
@@ -81,9 +118,8 @@
     </div>
   </div>
 
-  <p>First name: <strong data-bind="text: firstName"></strong></p>
-  <p>Last name: <strong data-bind="text: lastName"></strong></p>
-
+  <script src="../static/bower_components/knockout/dist/knockout.js"></script>
+  <script src="../static/js/script.js"></script>
 </body>
 
 <script>
