@@ -23,33 +23,38 @@
         <form name="curlBuilder">
           <div class="row">
             <table>
-              <thead>
+              <thead id='title'>
                 <tr>
                   <h3>Headers</h3>
                 </tr>
               </thead>
-              <tbody data-bind="foreach: pairs" />
-              <tr>
-                <td class="form-group col-xs-5 col-md-5">
-                  <input data-bind="autocomplete: {data: $root.pets, maxItems: 6 }" value="" class="form-control" type="text" name="key" title="Enter a key" placeholder="Pets" />
+              <tbody/>
+              <tr id="tr">
+                <td>
+                  <select id="select" data-bind="options: Object.keys(AnimalDict), value: selectedPet">hi</select>
+                  <p data-bind="text:selectedPet"><p>
+                  <p data-bind="text: "><p>
+                  <input data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6 }" value="" class="form-control" type="text" name="key" title="Enter a key" placeholder="Pets" />
                 </td>
-                <td class="form-group col-xs-4 col-md-5">
-                  <input data-bind="autocomplete: {data: $root.breeds, maxItems: 6 }" value="" class="form-control" type="text" name="value" title="Enter a value" placeholder="Breeds" />
+                <td>
+                  <select id="select" data-bind="options: AnimalDict[selectedPet()]">hi</select>
+                  <input data-bind="autocomplete: {data: AnimalDict[selectedPet()], maxItems: 6 }" value="" class="form-control" type="text" name="value" title="Enter a value" placeholder="Breeds" />
                 </td>
-                <td class="form-group col-xs-3 col-md-2">
+                <!--<td class="form-group col-xs-3 col-md-2">
                   <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
-                </td>
+                </td>-->
               </tr>
               </tbody>
             </table>
           </div>
-          <div class="row">
+          <!--<div class="row">
             <div class="form-group col-xs-12">
               <button id="another" data-bind="click: addKVPair" class="form-control btn btn-sm" name="addAnother" value="addAnother" />Add Another</button>
             </div>
-          </div>
+          </div>-->
       </div>
     </div>
+
 
     <div class="row">
       <div class="form-group col-xs-12 ">
