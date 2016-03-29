@@ -644,7 +644,10 @@
   };
 });
 
-
+//For the method dropdown. Shows currently selected method type.
+$(".dropdown-menu li a").click(function(){
+  $(this).parents(".dropdown").find('#methodType').html($(this).text())+ ' <span class="caret"></span>';
+});
 
 /*function KeyValue(myKey, myValue) {
   var self = this;
