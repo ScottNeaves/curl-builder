@@ -33,12 +33,11 @@
                 <td>
                   <select id="select" data-bind="options: Object.keys(AnimalDict), value: selectedPet">hi</select>
                   <p data-bind="text:selectedPet"><p>
-                  <p data-bind="text: "><p>
-                  <input data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6 }" value="" class="form-control" type="text" name="key" title="Enter a key" placeholder="Pets" />
+                  <input data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6}, value: selectedPet" class="form-control" type="text" name="key" title="Enter a key" placeholder="Pets" />
                 </td>
                 <td>
-                  <select id="select" data-bind="options: AnimalDict[selectedPet()]">hi</select>
-                  <input data-bind="autocomplete: {data: AnimalDict[selectedPet()], maxItems: 6 }" value="" class="form-control" type="text" name="value" title="Enter a value" placeholder="Breeds" />
+                  <select id="select" data-bind="options: AnimalDict[selectedPet()], value: selectedBreed">hi</select>
+                  <input data-bind="autocomplete: {data: AnimalDict[selectedPet()], maxItems: 6 }" class="form-control" type="text" name="value" title="Enter a value" placeholder="Breeds" />
                 </td>
                 <!--<td class="form-group col-xs-3 col-md-2">
                   <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
@@ -61,10 +60,10 @@
         <h3>Data</h3>
         <div class="checkbox">
           <label>
-            <input type="checkbox"> JSON?
+            <input type="checkbox" > JSON?
           </label>
         </div>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea class="form-control" rows="3" data-bind="value: dataPayload"></textarea>
       </div>
     </div>
 
@@ -84,8 +83,8 @@
               <li><a href="#">DELETE</a></li>
             </ul>
           </div>
-          <div class="form-gorup col-xs-8">
-            <input id="URL" class="form-control input-group-lg reg_name" type="text" name="URL" title="Enter a URL" placeholder="URL" />
+          <div class="form-group col-xs-8">
+            <input data-bind="value: url" id="URL" class="form-control input-group-lg reg_name" type="text" name="URL" title="Enter a URL" placeholder="URL" />
           </div>
         </div>
       </div>
@@ -95,7 +94,7 @@
       <div class="form-group col-xs-12">
         <h3>Curl Command</h3>
         <button id="copybutton" class="btn btn-sm copybtn" data-clipboard-target="#curlcmd">Copy to Clipboard</button>
-        <textarea id="curlcmd" class="form-control" rows="3"></textarea>
+        <textarea data-bind="value: curlCommand" id="curlcmd" class="form-control" rows="3"></textarea>
       </div>
     </div>
   </div>

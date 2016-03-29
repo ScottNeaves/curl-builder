@@ -663,13 +663,14 @@ console.log(Object.keys(AnimalDict))
 function ViewModel() {
   var self = this;
   self.selectedPet = ko.observable()
-  self.breedChoices = ko.computed(function(){
-    return AnimalDict[Object.keys(AnimalDict)[self.selectedPet]];
-  }, self);
-  breeds = AnimalDict[Object.keys(AnimalDict)[2]]
-  console.log(breeds)
-  breeds2 = AnimalDict['dog']
-  console.log(breeds2)
+  self.selectedBreed = ko.observable()
+  self.dataPayload = ko.observable()
+  self.methodType = ko.observable()
+  self.url = ko.observable()
+  self.curlCommand = ko.computed(function(){
+    return self.selectedPet() + " " + self.selectedBreed() + " " + self.dataPayload() + " " + self.url()
+  })
+
 
   // Editable data
   /*self.pairs = ko.observableArray([
