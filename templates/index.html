@@ -62,7 +62,6 @@
       </div>
     </div>
 
-
     <div class="row">
       <div class="form-group col-xs-12 ">
         <h3>Data</h3>
@@ -78,26 +77,21 @@
     <div class="row">
       <div class="form-group col-xs-12">
         <h3>Method</h3>
-        <div class="row">
-          <div class="btn-group col-xs-4 dropdown">
-            <button id="methodType" type="button" class="btn btn-default">POST</button>
-            <button type="button" data-bind="value: methodType" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">POST</a></li>
-              <li><a href="#">PUT</a></li>
-              <li><a href="#">GET</a></li>
-              <li><a href="#">DELETE</a></li>
-            </ul>
-          </div>
-          <div class="form-group col-xs-8">
-            <input data-bind="value: url" id="URL" class="form-control input-group-lg reg_name" type="text" name="URL" title="Enter a URL" placeholder="URL" />
-          </div>
+        <div class="col-xs-2">
+          <select class="form-control" name="chooseMethod">
+            <option value="GET" selected>GET</option>
+            <option value="PUT">PUT</option>
+            <option value="POST">POST</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </div>
+        <div class="col-xs-10">
+          <input data-bind="value: url" id="URL" class="form-control" type="text" name="URL" title="Enter a URL" placeholder="URL" />
         </div>
       </div>
     </div>
     </form>
+
     <div class="row">
       <div class="form-group col-xs-12">
         <h3>Curl Command</h3>
