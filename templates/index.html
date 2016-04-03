@@ -5,72 +5,31 @@
   <meta charset="utf-8">
   <title>Curl Builder</title>
   <meta name="description" content="Builds curl commands">
-  <!-- scripts -->
-  <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <!-- stylesheets -->
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
+  <link rel="stylesheet" href="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.css">
 </head>
 
 <body class="container">
   <h1 class="well">Curl Builder</h1>
   <div class="well">
-
-    <!--KNOCKOUT LIST EXAMPLE
-    <table>
-      <thead>
-        <tr>
-          <th>Headers</th>
-        </tr>
-      </thead>
-      <tbody data-bind="foreach: pairs">
-        <tr>
-          <td>
-            <input data-bind="value: myKey" />
-          </td>
-          <td>
-            <input data-bind="value: myValue" />
-          </td>
-          <td><a href="#" data-bind="click: $root.removePair">Remove</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <button data-bind="click: addKVPair">Add Another</button>
-    END KNOCKOUT LIST EXAMPLE-->
+    <h3>Headers</h3>
+    <div data-bind="foreach: headers">
+      <div class="row header">
+        <form class="form-inline col-xs-12">
+          <div class="form-group col-xs-9">
+            <input class="form-control header-input" data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6}, value: key" type="text" placeholder="key"/>
+            <input class="form-control header-input" data-bind="autocomplete: {data: $parent.headers.getSuggestedValues($data), maxItems: 6}, value: value" type="text" placeholder="value"/>
+          </div>
+          <button data-bind="click: $parent.headers.removeHeader" class="btn btn-default col-xs-3">Remove</button>
+        </form>
+      </div>
+    </div>
 
     <div class="row">
       <div class="form-group col-xs-12">
-        <form name="curlBuilder">
-          <div class="row">
-            <table>
-              <thead>
-                <tr>
-                  <h3>Headers</h3>
-                </tr>
-              </thead>
-              <tbody data-bind="foreach: pairs" />
-              <tr>
-                <td class="form-group col-xs-5 col-md-5">
-                  <input id="KeyGuess" data-bind="value: myKey, valueUpdate:'blur'" class="form-control" type="text" name="key" title="Enter a key" placeholder="Key" />
-                </td>
-                <td class="form-group col-xs-4 col-md-5">
-                  <input data-bind="value:myValue" class="form-control" type="text" name="value" title="Enter a value" placeholder="Value" />
-                </td>
-                <td class="form-group col-xs-3 col-md-2">
-                  <button data-bind="click: $root.removePair" class="form-control btn btn-default" name="remove" value="Remove" />Remove</button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="row">
-            <div class="form-group col-xs-2">
-              <button data-bind="click: addKVPair" class="form-control btn btn-sm" name="addAnother" value="addAnother" />Add Another</button>
-            </div>
-          </div>
+        <button id="another" data-bind="click: headers.addHeader" class="form-control btn btn-sm" name="addAnother" value="addAnother">Add Another</button>
       </div>
     </div>
 
@@ -82,49 +41,44 @@
             <input type="checkbox"> JSON?
           </label>
         </div>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea class="form-control" rows="3" data-bind="value: dataPayload"></textarea>
       </div>
     </div>
 
     <div class="row">
       <div class="form-group col-xs-12">
         <h3>Method</h3>
-        <div class="row">
-          <div class="btn-group col-xs-4">
-            <button type="button" class="btn btn-default">POST</button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li><a href="#">POST</a></li>
-              <li><a href="#">PUT</a></li>
-              <li><a href="#">GET</a></li>
-              <li><a href="#">DELETE</a></li>
-            </ul>
-          </div>
-          <div class="form-gorup col-xs-8">
-            <input id="URL" class="form-control input-group-lg reg_name" type="text" name="URL" title="Enter a URL" placeholder="URL" />
-          </div>
+        <div class="col-xs-2">
+          <select class="form-control" name="chooseMethod">
+            <option value="GET" selected>GET</option>
+            <option value="PUT">PUT</option>
+            <option value="POST">POST</option>
+            <option value="DELETE">DELETE</option>
+          </select>
+        </div>
+        <div class="col-xs-10">
+          <input data-bind="value: url" id="URL" class="form-control" type="text" name="URL" title="Enter a URL" placeholder="URL" />
         </div>
       </div>
     </div>
-    </form>
+
     <div class="row">
       <div class="form-group col-xs-12">
         <h3>Curl Command</h3>
         <button id="copybutton" class="btn btn-sm copybtn" data-clipboard-target="#curlcmd">Copy to Clipboard</button>
-        <textarea id="curlcmd" class="form-control" rows="3"></textarea>
+        <textarea data-bind="value: curlCommand" id="curlcmd" class="form-control" rows="3"></textarea>
       </div>
     </div>
+
   </div>
 
+  <!-- scripts -->
+  <script src="../static/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
   <script src="../static/bower_components/knockout/dist/knockout.js"></script>
+  <script type="text/javascript" src="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.js"></script>
   <script src="../static/js/script.js"></script>
+  <script>var clipboard = new Clipboard('.copybtn');</script>
 </body>
-
-<script>
-  var clipboard = new Clipboard('.copybtn');
-</script>
-
-
 </html>

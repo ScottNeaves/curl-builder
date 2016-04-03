@@ -1,54 +1,50 @@
-// Class to represent a row in the seat reservations grid
-
-$(function() {
-   var availableTags = [
-     "ActionScript",
-     "AppleScript",
-     "Asp",
-     "BASIC",
-     "C",
-     "C++",
-     "Clojure",
-     "COBOL",
-     "ColdFusion",
-     "Erlang",
-     "Fortran",
-     "Groovy",
-     "Haskell",
-     "Java",
-     "JavaScript",
-     "Lisp",
-     "Perl",
-     "PHP",
-     "Python",
-     "Ruby",
-     "Scala",
-     "Scheme"
-   ];
-   $( "#KeyGuess" ).autocomplete({
-     source: availableTags
-   });
- });
+//For the method dropdown. Shows currently selected method type.
+$(".dropdown-menu li a").click(function(){
+  $(this).parents(".dropdown").find('#methodType').html($(this).text())+ ' <span class="caret"></span>';
+});
 
 function KeyValue(myKey, myValue) {
-    var self = this;
-    self.myKey=myKey;
-    self.myValue=myValue;
+  var self = this;
+  self.myKey = myKey;
+  self.myValue = myValue;
 }
-// Overall viewmodel for this screen, along with initial state
-function KVPairsViewModel() {
-    var self = this;
+var AnimalDict = {
+  "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
+  "cat": ['tabby', 'Siamese', 'Garfield'],
+  "bird": ['Parrot', 'Peregrin-Falcon', 'Hawk'],
+  "hamster": ['Weebly', 'Woobly', 'Feeny']
+};
 
-    // Editable data
-    self.pairs = ko.observableArray([
-        new KeyValue("")
-    ]);
+function ViewModel() {
+  var self = this;
+  self.selectedPet = ko.observable("")
+  self.selectedBreed = ko.observable("")
+  self.dataPayload = ko.observable("")
+  self.methodType = ko.observable("")
+  self.url = ko.observable("")
 
-    // Operations
-    self.addKVPair = function() {
-        self.pairs.push(new KeyValue(""));
-    }
-    self.removePair = function(pair) { self.pairs.remove(pair) }
-}
+  self.curlCommand = ko.computed(function(){
+    return self.selectedPet() + " " + self.selectedBreed() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
+  })
 
-ko.applyBindings(new KVPairsViewModel());
+  self.headers = ko.observableArray([
+    {key: ko.observable(""), value:ko.observable("")},
+  ]);
+
+  self.headers.getSuggestedValues = function(pair){
+    return ko.computed(function () {
+                return AnimalDict[pair.key()];
+            });
+  };
+
+  // Callbacks
+  self.headers.addHeader = function() {
+    self.headers.push({key: ko.observable(null), value: ko.observable(null)});
+  }
+  self.headers.removeHeader = function() {
+    self.headers.remove(this)
+  }
+
+};
+
+ko.applyBindings(new ViewModel());
