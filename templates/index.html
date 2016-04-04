@@ -19,17 +19,34 @@
       <div class="row header">
         <form class="form-inline col-xs-12">
           <div class="form-group col-xs-9">
-            <input class="form-control header-input" data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6}, value: key" type="text" placeholder="key"/>
-            <input class="form-control header-input" data-bind="autocomplete: {data: $parent.headers.getSuggestedValues($data), maxItems: 6}, value: value" type="text" placeholder="value"/>
+            <input class="form-control header-input" data-bind="autocomplete: {data: Object.keys(AnimalDict), maxItems: 6}, value: key" type="text" placeholder="key" />
+            <input class="form-control header-input" data-bind="autocomplete: {data: $parent.headers.getSuggestedValues($data), maxItems: 6}, value: value" type="text" placeholder="value" />
           </div>
           <button data-bind="click: $parent.headers.removeHeader" class="btn btn-default col-xs-3">Remove</button>
         </form>
       </div>
     </div>
-
     <div class="row">
       <div class="form-group col-xs-12">
         <button id="another" data-bind="click: headers.addHeader" class="form-control btn btn-sm" name="addAnother" value="addAnother">Add Another</button>
+      </div>
+    </div>
+
+    <h3>Query Parameters</h3>
+    <div data-bind="foreach: queryParams">
+      <div class="row header">
+        <form class="form-inline col-xs-12">
+          <div class="form-group col-xs-9">
+            <input class="form-control header-input" data-bind="value: key" type="text" placeholder="key" />
+            <input class="form-control header-input" data-bind="value: value" type="text" placeholder="value" />
+          </div>
+          <button data-bind="click: $parent.queryParams.removePair" class="btn btn-default col-xs-3">Remove</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <button id="another" data-bind="click: queryParams.addPair" class="form-control btn btn-sm" name="addAnother" value="addAnother">Add Another</button>
       </div>
     </div>
 
@@ -79,6 +96,9 @@
   <script src="../static/bower_components/knockout/dist/knockout.js"></script>
   <script type="text/javascript" src="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.js"></script>
   <script src="../static/js/script.js"></script>
-  <script>var clipboard = new Clipboard('.copybtn');</script>
+  <script>
+    var clipboard = new Clipboard('.copybtn');
+  </script>
 </body>
+
 </html>
