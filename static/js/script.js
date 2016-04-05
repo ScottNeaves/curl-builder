@@ -1,13 +1,3 @@
-//For the method dropdown. Shows currently selected method type.
-$(".dropdown-menu li a").click(function(){
-  $(this).parents(".dropdown").find('#methodType').html($(this).text())+ ' <span class="caret"></span>';
-});
-
-function KeyValue(myKey, myValue) {
-  var self = this;
-  self.myKey = myKey;
-  self.myValue = myValue;
-}
 var AnimalDict = {
   "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
   "cat": ['tabby', 'Siamese', 'Garfield'],
@@ -15,34 +5,57 @@ var AnimalDict = {
   "hamster": ['Weebly', 'Woobly', 'Feeny']
 };
 
+var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
+
 function ViewModel() {
   var self = this;
-  self.selectedPet = ko.observable("")
-  self.selectedBreed = ko.observable("")
   self.dataPayload = ko.observable("")
   self.methodType = ko.observable("")
   self.url = ko.observable("")
+  self.queryParams = ko.observableArray([{
+    key: ko.observable(""),
+    value: ko.observable("")
+  }, ]);
 
-  self.curlCommand = ko.computed(function(){
-    return self.selectedPet() + " " + self.selectedBreed() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
+
+  self.curlCommand = ko.computed(function() {
+    return self.queryParams()[0].key() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
   })
 
-  self.headers = ko.observableArray([
-    {key: ko.observable(""), value:ko.observable("")},
-  ]);
 
-  self.headers.getSuggestedValues = function(pair){
-    return ko.computed(function () {
-                return AnimalDict[pair.key()];
-            });
+  self.headers = ko.observableArray([{
+    key: ko.observable(""),
+    value: ko.observable("")
+  }, ]);
+
+  self.headers.getSuggestedValues = function(pair) {
+    return ko.computed(function() {
+      return AnimalDict[pair.key()];
+    });
   };
 
   // Callbacks
   self.headers.addHeader = function() {
-    self.headers.push({key: ko.observable(null), value: ko.observable(null)});
+    self.headers.push({
+      key: ko.observable(null),
+      value: ko.observable(null)
+    });
   }
   self.headers.removeHeader = function() {
     self.headers.remove(this)
+  }
+
+
+
+  self.queryParams.addQueryParam = function() {
+    self.queryParams.push({
+      key: ko.observable(null),
+      value: ko.observable(null)
+    });
+  }
+
+  self.queryParams.removeQueryParam = function() {
+    self.queryParams.remove(this)
   }
 
 };
