@@ -17,16 +17,26 @@ function ViewModel() {
     value: ko.observable("")
   }, ]);
 
-
-  self.curlCommand = ko.computed(function() {
-    return self.queryParams()[0].key() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
-  })
-
-
   self.headers = ko.observableArray([{
     key: ko.observable(""),
     value: ko.observable("")
   }, ]);
+
+  self.curlCommand = ko.computed(function() {
+    this.queryParameters = "?"
+    for (var i = 0; i < self.queryParams().length; i++){
+      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value() +"&"
+    }
+
+    this.headers = ""
+    for (var i = 0; i < self.headers().length; i++){
+      this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
+    }
+    return "curl " + this.headers + " " + self.url() + this.queryParameters + " " + self.dataPayload() + " " + self.methodType()
+  })
+
+
+
 
   self.headers.getSuggestedValues = function(pair) {
     return ko.computed(function() {
