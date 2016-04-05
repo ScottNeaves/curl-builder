@@ -1,8 +1,3 @@
-function KeyValue(myKey, myValue) {
-  var self = this;
-  self.myKey = myKey;
-  self.myValue = myValue;
-}
 var AnimalDict = {
   "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
   "cat": ['tabby', 'Siamese', 'Garfield'],
@@ -52,14 +47,14 @@ function ViewModel() {
 
 
 
-  self.queryParams.addPair = function() {
+  self.queryParams.addQueryParam = function() {
     self.queryParams.push({
       key: ko.observable(null),
       value: ko.observable(null)
     });
   }
 
-  self.queryParams.removePair = function() {
+  self.queryParams.removeQueryParam = function() {
     self.queryParams.remove(this)
   }
 

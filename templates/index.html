@@ -40,13 +40,13 @@
             <input class="form-control header-input" data-bind="value: key" type="text" placeholder="key" />
             <input class="form-control header-input" data-bind="value: value" type="text" placeholder="value" />
           </div>
-          <button data-bind="click: $parent.queryParams.removePair" class="btn btn-default col-xs-3">Remove</button>
+          <button data-bind="click: $parent.queryParams.removeQueryParam" class="btn btn-default col-xs-3">Remove</button>
         </form>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-xs-12">
-        <button id="another" data-bind="click: queryParams.addPair" class="form-control btn btn-sm" name="addAnother" value="addAnother">Add Another</button>
+        <button id="another" data-bind="click: queryParams.addQueryParam" class="form-control btn btn-sm" name="addAnother" value="addAnother">Add Another</button>
       </div>
     </div>
 
