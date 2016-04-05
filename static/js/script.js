@@ -1,8 +1,3 @@
-//For the method dropdown. Shows currently selected method type.
-$(".dropdown-menu li a").click(function() {
-  $(this).parents(".dropdown").find('#methodType').html($(this).text()) + ' <span class="caret"></span>';
-});
-
 function KeyValue(myKey, myValue) {
   var self = this;
   self.myKey = myKey;
@@ -15,10 +10,10 @@ var AnimalDict = {
   "hamster": ['Weebly', 'Woobly', 'Feeny']
 };
 
+var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
+
 function ViewModel() {
   var self = this;
-  self.selectedPet = ko.observable("")
-  self.selectedBreed = ko.observable("")
   self.dataPayload = ko.observable("")
   self.methodType = ko.observable("")
   self.url = ko.observable("")
@@ -29,7 +24,7 @@ function ViewModel() {
 
 
   self.curlCommand = ko.computed(function() {
-    return self.selectedPet() + " " + self.selectedBreed() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
+    return self.queryParams()[0].key() + " " + self.dataPayload() + " " + self.methodType() + " " + self.url()
   })
 
 
