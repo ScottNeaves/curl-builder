@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/styles.css">
   <link rel="stylesheet" href="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.css">
+  <link rel="import" href="static/bower_components/juicy-ace-editor/juicy-ace-editor.html">
 </head>
 
 <body class="container">
@@ -58,7 +59,20 @@
             <input type="checkbox"> JSON?
           </label>
         </div>
-        <textarea class="form-control" rows="3" data-bind="value: dataPayload"></textarea>
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-12 ">
+        <h3>Data</h3>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> JSON?
+          </label>
+        </div>
+        <div id="editor" data-bind="value: dataPayload">
+        </div>
       </div>
     </div>
 

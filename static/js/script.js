@@ -1,3 +1,7 @@
+var editor = ace.edit("editor")
+editor.setTheme("ace/theme/monokai")
+editor.getSession().setMode("ace/mode/javascript");
+
 var AnimalDict = {
   "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
   "cat": ['tabby', 'Siamese', 'Garfield'],
