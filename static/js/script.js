@@ -14,6 +14,7 @@ var AnimalDict = {
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
+var editorModes = ['Text', 'JSON', 'XML']
 
 function ViewModel() {
   var self = this;
@@ -24,7 +25,11 @@ function ViewModel() {
     key: ko.observable(""),
     value: ko.observable("")
   }, ]);
-
+  self.editorMode = ko.observable(editorModes[1])
+  self.editorMode.subscribe(function(){
+      console.log("hi")
+      editor.getSession().setMode(self.editorMode())
+  });
   self.headers = ko.observableArray([{
     key: ko.observable(""),
     value: ko.observable("")
@@ -40,7 +45,7 @@ function ViewModel() {
     for (var i = 0; i < self.headers().length; i++){
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl " + this.headers + " " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
+    return "curl " + this.headers + " " + editorContent + " " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
   })
 
 

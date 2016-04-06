@@ -52,29 +52,17 @@
     </div>
 
     <div class="row">
-      <div class="form-group col-xs-12 ">
+      <div class="form-group col-xs-12">
         <h3>Data</h3>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> JSON?
-          </label>
+        <div class="col-xs-3">
+          <select data-bind="options: editorModes, value:editorMode" class="form-control"></select>
         </div>
-        <textarea class="form-control" rows="3"></textarea>
       </div>
     </div>
 
-    <div class="row">
-      <div class="form-group col-xs-12 ">
-        <h3>Data</h3>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> JSON?
-          </label>
-        </div>
-        <div id="editor" data-bind="value: dataPayload">
-        </div>
-      </div>
-    </div>
+    <div id="editor" class=></div>
+
+
 
     <div class="row">
       <div class="form-group col-xs-12">
