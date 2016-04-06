@@ -1,6 +1,10 @@
 var editor = ace.edit("editor")
 editor.setTheme("ace/theme/monokai")
 editor.getSession().setMode("ace/mode/javascript");
+var editorContent = ""
+editor.getSession().on('change', function(e) {
+    editorContent = editor.getValue()
+});
 
 var AnimalDict = {
   "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
@@ -36,7 +40,7 @@ function ViewModel() {
     for (var i = 0; i < self.headers().length; i++){
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl " + this.headers + " " + self.url() + this.queryParameters + " " + self.dataPayload() + " " + self.methodType()
+    return "curl " + this.headers + " " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
   })
 
 
