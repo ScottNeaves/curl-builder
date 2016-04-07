@@ -45,7 +45,7 @@ function ViewModel() {
     for (var i = 0; i < self.headers().length; i++){
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl " + this.headers + " " + editorContent + " " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
+    return "curl --verbose " + this.headers + " --data \"" + editorContent + "\" --request " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
   })
 
 
