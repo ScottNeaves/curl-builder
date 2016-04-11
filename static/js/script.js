@@ -1,9 +1,10 @@
 var editor = ace.edit("editor")
-editor.setTheme("ace/theme/monokai")
+editor.setTheme("ace/theme/chrome")
 editor.getSession().setMode("ace/mode/javascript");
+editor.setOption("showPrintMargin", false)
 var editorContent = ""
 editor.getSession().on('change', function(e) {
-    editorContent = editor.getValue()
+  editorContent = editor.getValue()
 });
 
 var AnimalDict = {
@@ -14,7 +15,7 @@ var AnimalDict = {
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
-var editorModes = ['Text', 'JSON', 'XML']
+var editorModes = ['text', 'json', 'xml']
 
 function ViewModel() {
   var self = this;
@@ -25,10 +26,9 @@ function ViewModel() {
     key: ko.observable(""),
     value: ko.observable("")
   }, ]);
-  self.editorMode = ko.observable(editorModes[1])
-  self.editorMode.subscribe(function(){
-      console.log("hi")
-      editor.getSession().setMode(self.editorMode())
+  self.editorMode = ko.observable()
+  self.editorMode.subscribe(function() {
+    editor.getSession().setMode("ace/mode/" + self.editorMode())
   });
   self.headers = ko.observableArray([{
     key: ko.observable(""),
@@ -37,15 +37,15 @@ function ViewModel() {
 
   self.curlCommand = ko.computed(function() {
     this.queryParameters = "?"
-    for (var i = 0; i < self.queryParams().length; i++){
-      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value() +"&"
+    for (var i = 0; i < self.queryParams().length; i++) {
+      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value() + "&"
     }
 
     this.headers = ""
-    for (var i = 0; i < self.headers().length; i++){
+    for (var i = 0; i < self.headers().length; i++) {
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl " + this.headers + " " + editorContent + " " + self.url() + this.queryParameters + " " + self.dataPayload()+ " " + self.methodType()
+    return "curl --verbose " + this.headers + " --data \"" + editorContent + "\" --request \"" + self.methodType() + "\" " + self.url() + this.queryParameters
   })
 
 
