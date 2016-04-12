@@ -5,6 +5,8 @@ editor.setOption("showPrintMargin", false)
 var editorContent = ""
 editor.getSession().on('change', function(e) {
   editorContent = editor.getValue()
+  editorContent = editorContent.split("\n").join("");
+  editorContent = editorContent.replace(/\t/g, "");
 });
 
 var AnimalDict = {
