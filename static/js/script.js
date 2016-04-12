@@ -38,7 +38,10 @@ function ViewModel() {
   self.curlCommand = ko.computed(function() {
     this.queryParameters = "?"
     for (var i = 0; i < self.queryParams().length; i++) {
-      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value() + "&"
+      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value()
+      if(i < self.queryParams().length - 1){
+        this.queryParameters = this.queryParameters + "&"
+      }
     }
 
     this.headers = ""
