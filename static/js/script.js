@@ -5,8 +5,7 @@ editor.setOption("showPrintMargin", false)
 var editorContent = ""
 editor.getSession().on('change', function(e) {
   editorContent = editor.getValue()
-  editorContent = editorContent.split("\n").join("");
-  editorContent = editorContent.replace(/\t/g, "");
+  editorContent = JSON.stringify(JSON.parse(editorContent))
 });
 
 var AnimalDict = {
@@ -50,8 +49,7 @@ function ViewModel() {
     for (var i = 0; i < self.headers().length; i++) {
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl --verbose " + this.headers + " --data \"" + editorContent + "\" --request \"" + self.methodType() + "\" " + self.url() + this.queryParameters
-  })
+    return "curl --verbose " + this.headers + " --data \"" + editorContent + "\"--request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" })
 
 
 

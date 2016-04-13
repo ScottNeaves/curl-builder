@@ -45,3 +45,7 @@ h1, h2, h3{
 #editor {
     height:400px;
   }
+
+#curlcommandarea{
+  height:200px;
+}
