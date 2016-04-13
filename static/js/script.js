@@ -27,7 +27,7 @@ function ViewModel() {
     key: ko.observable(""),
     value: ko.observable("")
   }, ]);
-  self.editorMode = ko.observable()
+  self.editorMode = ko.observable("json")
   self.editorMode.subscribe(function() {
     editor.getSession().setMode("ace/mode/" + self.editorMode())
   });
