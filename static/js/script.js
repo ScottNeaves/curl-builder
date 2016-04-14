@@ -12,13 +12,18 @@ var AnimalDict = {
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
-//var editorModes = ['text', 'json', 'xml']
+  //var editorModes = ['text', 'json', 'xml']
 
-var editorModes = [
-   { value: 'text', name: 'Plain Text' },
-   { value: 'json', name: 'JSON' },
-   { value: 'xml', name: 'XML' }
-]
+var editorModes = [{
+  value: 'text',
+  name: 'Plain Text'
+}, {
+  value: 'json',
+  name: 'JSON'
+}, {
+  value: 'xml',
+  name: 'XML'
+}]
 
 function ViewModel() {
   var self = this;
@@ -35,8 +40,6 @@ function ViewModel() {
   });
   self.username = ko.observable("")
   self.password = ko.observable("")
-
-
   editor.getSession().on('change', function(e) {
     editorContent = editor.getValue()
       //editorContent = JSON.stringify(JSON.parse(editorContent))
@@ -44,9 +47,15 @@ function ViewModel() {
       //Takes away spaces even in strings that need to be passed to server.
       //Probably need to use a JSON parser. However the above commented
       //parse command throws up whenever it is handed bad syntax.
-      editorContent = editorContent.replace(/[ \n\t]/g,'');
+      editorContent = editorContent.replace(/[ \n\t]/g, '');
     }
   });
+  self.formatText = function() {
+    //editorContentasObject = JSON.parse(editorContent)
+    if (self.editorMode() == 'json') {
+      editor.setValue(JSON.stringify(JSON.parse(editorContent), null, '\t'));
+    }
+  }
 
   self.headers = ko.observableArray([{
     key: ko.observable(""),
@@ -68,9 +77,6 @@ function ViewModel() {
     }
     return "curl --verbose " + this.headers + ' --data \'' + editorContent + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" + " --user \'" + self.username() + ":" + self.password() + "\'"
   })
-
-
-
 
   self.headers.getSuggestedValues = function(pair) {
     return ko.computed(function() {
