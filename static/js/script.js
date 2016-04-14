@@ -12,13 +12,13 @@ var AnimalDict = {
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
-var editorModes = ['text', 'json', 'xml']
+//var editorModes = ['text', 'json', 'xml']
 
-/*var editorModes = [
+var editorModes = [
    { value: 'text', name: 'Plain Text' },
    { value: 'json', name: 'JSON' },
    { value: 'xml', name: 'XML' }
-]*/
+]
 
 function ViewModel() {
   var self = this;
@@ -38,8 +38,10 @@ function ViewModel() {
     editorContent = editor.getValue()
       //editorContent = JSON.stringify(JSON.parse(editorContent))
     if (self.editorMode() == 'json') {
+      //Takes away spaces even in strings that need to be passed to server.
+      //Probably need to use a JSON parser. However the above commented
+      //parse command throws up whenever it is handed bad syntax.
       editorContent = editorContent.replace(/[ \n\t]/g,'');
-      console.log(editorContent)
     }
   });
 
