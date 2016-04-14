@@ -33,6 +33,9 @@ function ViewModel() {
   self.editorMode.subscribe(function() {
     editor.getSession().setMode("ace/mode/" + self.editorMode())
   });
+  self.username = ko.observable("")
+  self.password = ko.observable("")
+
 
   editor.getSession().on('change', function(e) {
     editorContent = editor.getValue()
@@ -63,7 +66,7 @@ function ViewModel() {
     for (var i = 0; i < self.headers().length; i++) {
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl --verbose " + this.headers + ' --data \'' + editorContent + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\""
+    return "curl --verbose " + this.headers + ' --data \'' + editorContent + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" + " --user \'" + self.username() + ":" + self.password() + "\'"
   })
 
 
