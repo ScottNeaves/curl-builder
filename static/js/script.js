@@ -40,27 +40,25 @@ function ViewModel() {
   });
   self.username = ko.observable("")
   self.password = ko.observable("")
+  self.editorContentObservable = ko.observable("")
   editor.getSession().on('change', function(e) {
     editorContent = editor.getValue()
-      //editorContent = JSON.stringify(JSON.parse(editorContent))
+    self.editorContentObservable(editorContent)
     if (self.editorMode() == 'json') {
-      //Takes away spaces even in strings that need to be passed to server.
-      //Probably need to use a JSON parser. However the above commented
-      //parse command throws up whenever it is handed bad syntax.
       editorContent = editorContent.replace(/[ \n\t]/g, '');
+      self.editorContentObservable(editorContent)
     }
   });
   self.formatText = function() {
-    //editorContentasObject = JSON.parse(editorContent)
     if (self.editorMode() == 'json') {
       editor.setValue(JSON.stringify(JSON.parse(editorContent), null, '\t'));
     }
   }
-
   self.headers = ko.observableArray([{
     key: ko.observable(""),
     value: ko.observable("")
   }, ]);
+
 
   self.curlCommand = ko.computed(function() {
     this.queryParameters = "?"
@@ -70,12 +68,12 @@ function ViewModel() {
         this.queryParameters = this.queryParameters + "&"
       }
     }
-
     this.headers = ""
     for (var i = 0; i < self.headers().length; i++) {
       this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
     }
-    return "curl --verbose " + this.headers + ' --data \'' + editorContent + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" + " --user \'" + self.username() + ":" + self.password() + "\'"
+
+    return "curl --verbose " + this.headers + ' --data \'' + self.editorContentObservable() + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" + " --user \'" + self.username() + ":" + self.password() + "\'"
   })
 
   self.headers.getSuggestedValues = function(pair) {
