@@ -20,6 +20,7 @@
     "knockout": "^3.4.0",
     "bootstrap": "^3.3.6",
     "clipboard": "1.0.0",
-    "juicy-ace-editor": "^1.1.1"
+    "juicy-ace-editor": "^1.1.1",
+    "vkBeautify": "vkbeautify#*"
   }
 }
