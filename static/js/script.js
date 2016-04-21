@@ -49,7 +49,7 @@ function ViewModel() {
       self.editorContentObservable(editorContent)
     }
     if (editorContent != "") {
-      editorContent = '--data \'' + editorContent
+      editorContent = '--data ' + editorContent
       self.editorContentObservable(editorContent)
     }
   });
@@ -75,7 +75,7 @@ function ViewModel() {
         if (i < self.queryParams().length - 1) {
           this.queryParameters = this.queryParameters + "&"
         }else{
-          this.queryParameters = this.queryParameters + "\""
+          this.queryParameters = this.queryParameters
         }
       }
     }
@@ -91,8 +91,12 @@ function ViewModel() {
       authString = ' --user \'' + self.username() + ":" + self.password() + "\'"
     }
 
+    var urlString = ''
+    if(self.url() != ''){
+      urlString = "\"" + self.url() + "\""
+    }
 
-    return "curl --verbose " + this.headers + self.editorContentObservable() + "\' --request \"" + self.methodType() + "\" \"" + self.url() + "\"" + this.queryParameters + authString
+    return "curl --verbose " + this.headers + self.editorContentObservable() + " --request \"" + self.methodType() + "\" " + self.url() + this.queryParameters + authString
   })
 
   self.headers.getSuggestedValues = function(pair) {
