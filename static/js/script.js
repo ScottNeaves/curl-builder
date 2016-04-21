@@ -48,6 +48,10 @@ function ViewModel() {
       editorContent = editorContent.replace(/[ \n\t]/g, '');
       self.editorContentObservable(editorContent)
     }
+    if (editorContent != "") {
+      editorContent = '--data \'' + editorContent
+      self.editorContentObservable(editorContent)
+    }
   });
   self.formatText = function() {
     if (self.editorMode() == 'json') {
@@ -61,19 +65,34 @@ function ViewModel() {
 
 
   self.curlCommand = ko.computed(function() {
-    this.queryParameters = "?"
+    this.queryParameters = ''
+    if (self.queryParams()[0].key() != '') {
+      this.queryParameters = "?"
+    }
     for (var i = 0; i < self.queryParams().length; i++) {
-      this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value()
-      if (i < self.queryParams().length - 1) {
-        this.queryParameters = this.queryParameters + "&"
+      if (self.queryParams()[i].key() != '' && self.queryParams()[i].value() != '') {
+        this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value()
+        if (i < self.queryParams().length - 1) {
+          this.queryParameters = this.queryParameters + "&"
+        }else{
+          this.queryParameters = this.queryParameters + "\""
+        }
       }
     }
     this.headers = ""
     for (var i = 0; i < self.headers().length; i++) {
-      this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
+      if (self.headers()[i].key() != '' && self.headers()[i].value() != '') {
+        this.headers = this.headers + " --header \"" + self.headers()[i].key() + ": " + self.headers()[i].value() + "\""
+      }
     }
 
-    return "curl --verbose " + this.headers + ' --data \'' + self.editorContentObservable() + "\' --request \"" + self.methodType() + "\" \"" + self.url() + this.queryParameters + "\"" + " --user \'" + self.username() + ":" + self.password() + "\'"
+    var authString = '';
+    if (self.username() != '') {
+      authString = ' --user \'' + self.username() + ":" + self.password() + "\'"
+    }
+
+
+    return "curl --verbose " + this.headers + self.editorContentObservable() + "\' --request \"" + self.methodType() + "\" \"" + self.url() + "\"" + this.queryParameters + authString
   })
 
   self.headers.getSuggestedValues = function(pair) {
@@ -85,8 +104,8 @@ function ViewModel() {
   // Callbacks
   self.headers.addHeader = function() {
     self.headers.push({
-      key: ko.observable(null),
-      value: ko.observable(null)
+      key: ko.observable(''),
+      value: ko.observable('')
     });
   }
   self.headers.removeHeader = function() {
@@ -97,8 +116,8 @@ function ViewModel() {
 
   self.queryParams.addQueryParam = function() {
     self.queryParams.push({
-      key: ko.observable(null),
-      value: ko.observable(null)
+      key: ko.observable(''),
+      value: ko.observable('')
     });
   }
 
