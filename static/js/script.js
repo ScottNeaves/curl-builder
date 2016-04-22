@@ -44,14 +44,15 @@ function ViewModel() {
   editor.getSession().on('change', function(e) {
     editorContent = editor.getValue()
     self.editorContentObservable(editorContent)
-    if (self.editorMode() == 'json') {
-      editorContent = editorContent.replace(/[ \n\t]/g, '');
-      self.editorContentObservable(editorContent)
-    }
+    editorContent = editorContent.replace(/[\n\t]/g, '');
+    self.editorContentObservable(editorContent)
   });
   self.formatText = function() {
     if (self.editorMode() == 'json') {
       editor.setValue(JSON.stringify(JSON.parse(editorContent), null, '\t'));
+    }
+    if (self.editorMode() == 'xml') {
+      editor.setValue(vkbeautify.xml(editorContent));
     }
   }
   self.headers = ko.observableArray([{
