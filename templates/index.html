@@ -93,7 +93,7 @@
         <h3>Curl Command</h3>
         <div class="col-xs-12">
           <button id="copybutton" class="btn btn-sm copybtn" data-clipboard-target="#curlcmd">Copy to Clipboard</button>
-          <textarea id="curlcommandarea" readonly="true" data-bind="value: curlCommand" id="curlcmd" class="form-control" rows="3"></textarea>
+          <textarea id="curlcmd" readonly="true" data-bind="value: curlCommand" id="curlcmd" class="form-control" rows="3"></textarea>
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@
   <script src="../static/bower_components/clipboard/dist/clipboard.min.js"></script>
   <script src="../static/bower_components/knockout/dist/knockout.js"></script>
   <script type="text/javascript" src="../static/node_modules/knockout.autocomplete/lib/knockout.autocomplete.js"></script>
-  <script type="text/javascript" src="../static/bower_components/vkBeautify/vkbeautify.js"></script>
+  <script type="text/javascript" src="..static/bower_components/vkBeautify/vkbeautify.js"></script>
   <script src="../static/js/script.js"></script>
   <script>
     var clipboard = new Clipboard('.copybtn');
