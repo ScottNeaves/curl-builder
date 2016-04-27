@@ -46,6 +46,9 @@ function ViewModel() {
     self.editorContentObservable(editorContent)
     editorContent = editorContent.replace(/[\n\t]/g, '');
     self.editorContentObservable(editorContent)
+    if(self.editorContentObservable() != ''){
+      self.editorContentObservable('--data ' + self.editorContentObservable())
+    }
   });
   self.formatText = function() {
     if (self.editorMode() == 'json') {
