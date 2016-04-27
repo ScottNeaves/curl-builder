@@ -96,7 +96,7 @@ function ViewModel() {
       urlString = "\"" + self.url() + "\""
     }
 
-    return "curl --verbose " + this.headers + self.editorContentObservable() + " --request \"" + self.methodType() + "\" " + self.url() + this.queryParameters + authString
+    return "curl --verbose " + this.headers + self.editorContentObservable() + authString + " --request \"" + self.methodType() + "\" " + self.url() + this.queryParameters
   })
 
   self.headers.getSuggestedValues = function(pair) {
