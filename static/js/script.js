@@ -46,7 +46,7 @@ function ViewModel() {
     self.editorContentObservable(editorContent)
     editorContent = editorContent.replace(/[\n\t]/g, '');
     self.editorContentObservable(editorContent)
-    if(self.editorContentObservable() != ''){
+    if (self.editorContentObservable() != '') {
       self.editorContentObservable('--data ' + self.editorContentObservable())
     }
   });
@@ -58,6 +58,7 @@ function ViewModel() {
       editor.setValue(vkbeautify.xml(editorContent));
     }
   }
+
   self.headers = ko.observableArray([{
     key: ko.observable(""),
     value: ko.observable("")
@@ -74,7 +75,7 @@ function ViewModel() {
         this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value()
         if (i < self.queryParams().length - 1) {
           this.queryParameters = this.queryParameters + "&"
-        }else{
+        } else {
           this.queryParameters = this.queryParameters
         }
       }
@@ -92,7 +93,7 @@ function ViewModel() {
     }
 
     var urlString = ''
-    if(self.url() != ''){
+    if (self.url() != '') {
       urlString = "\"" + self.url() + "\""
     }
 
