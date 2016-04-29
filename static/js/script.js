@@ -46,7 +46,7 @@ function ViewModel() {
     self.editorContentObservable(editorContent)
     editorContent = editorContent.replace(/[\n\t]/g, '');
     self.editorContentObservable(editorContent)
-    if(self.editorContentObservable() != ''){
+    if (self.editorContentObservable() != '') {
       self.editorContentObservable('--data ' + self.editorContentObservable())
     }
   });
@@ -63,6 +63,30 @@ function ViewModel() {
     value: ko.observable("")
   }, ]);
 
+  self.saveSnip = function() {
+    var dataObject = {
+        username: self.username(),
+        password: self.password(),
+        dataPayload: self.dataPayload(),
+        editorMode: self.editorMode(),
+        methodType: self.methodType(),
+        url: self.url()
+      } //
+    //$.getJSON('/saveSnippet', data, function(data) {
+    //  $("#result").text(data.result)
+    //})
+    $.ajax({
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(dataObject),
+      dataType: 'json',
+      url: '/saveSnippet',
+      success: function(e) {
+        console.log(e);
+      }
+    });
+
+  }
 
   self.curlCommand = ko.computed(function() {
     this.queryParameters = ''
@@ -74,7 +98,7 @@ function ViewModel() {
         this.queryParameters = this.queryParameters + self.queryParams()[i].key() + "=" + self.queryParams()[i].value()
         if (i < self.queryParams().length - 1) {
           this.queryParameters = this.queryParameters + "&"
-        }else{
+        } else {
           this.queryParameters = this.queryParameters
         }
       }
@@ -92,7 +116,7 @@ function ViewModel() {
     }
 
     var urlString = ''
-    if(self.url() != ''){
+    if (self.url() != '') {
       urlString = "\"" + self.url() + "\""
     }
 

@@ -22,6 +22,10 @@ h1, h2, h3{
   float:right;
 }
 
+#saveSnippet{
+  float:right;
+}
+
 #another{
   width: 15%;
   float:right;

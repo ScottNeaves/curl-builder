@@ -14,6 +14,7 @@
 
 <body class="container">
   {{post}}
+  <p id="result"></p>
   <h1 class="well">Curl Builder</h1>
   <div class="well">
     <h3>Headers</h3>
@@ -53,14 +54,14 @@
     </div>
 
     <h3>Authentication</h3>
-      <div class="row header">
-        <form class="form-inline col-xs-12">
-          <div class="form-group col-xs-9">
-            <input class="form-control header-input" data-bind="textInput: username" type="text" placeholder="username" />
-            <input class="form-control header-input" data-bind="textInput: password" type="text" placeholder="password" />
-          </div>
-        </form>
-      </div>
+    <div class="row header">
+      <form class="form-inline col-xs-12">
+        <div class="form-group col-xs-9">
+          <input class="form-control header-input" data-bind="textInput: username" type="text" placeholder="username" />
+          <input class="form-control header-input" data-bind="textInput: password" type="text" placeholder="password" />
+        </div>
+      </form>
+    </div>
 
     <div class="row">
       <div class="form-group col-xs-12">
@@ -93,6 +94,7 @@
       <div class="form-group col-xs-12">
         <h3>Curl Command</h3>
         <div class="col-xs-12">
+          <button id="saveSnippet" data-bind="click: saveSnip" class="btn btn-sm">Save</button>
           <button id="copybutton" class="btn btn-sm" data-target="#hi">Copy to Clipboard</button>
           <textarea id="hi" data-bind="value: curlCommand" class="form-control" rows="3"></textarea>
         </div>
