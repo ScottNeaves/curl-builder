@@ -6,17 +6,6 @@ from datetime import datetime
 app = Flask(__name__)
 mongo = PyMongo(app)
 
-post = {"headers": {},
-              "qParams": {},
-              "username": "john",
-              "password": "doe",
-              "dataType": "JSON",
-              "data": "{testdata: hi}",
-              "method": "GET",
-              "URL": "www.google.com",
-              "date": datetime.utcnow()}
-
-
 @app.route('/', methods=['POST', 'GET'])
 def hello_world():
     if request.method == 'GET':
