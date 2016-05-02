@@ -64,17 +64,26 @@ function ViewModel() {
   }, ]);
 
   self.saveSnip = function() {
+    var qpms = []
+    for(var i = 0; i < self.queryParams().length; i++) {
+      qpms.push({key: self.queryParams()[i].key(), value: self.queryParams()[i].value()})
+    }
+    console.log("qpms " + qpms[0].key)
+    var hdrs = []
+    for(var i = 0; i < self.headers().length; i++) {
+      hdrs.push({key: self.headers()[i].key(), value: self.headers()[i].value()})
+    }
+    console.log("hdrs " + hdrs[0].key)
     var dataObject = {
+        headers: hdrs,
+        queryParameters: qpms,
         username: self.username(),
         password: self.password(),
         dataPayload: self.dataPayload(),
         editorMode: self.editorMode(),
         methodType: self.methodType(),
         url: self.url()
-      } //
-    //$.getJSON('/saveSnippet', data, function(data) {
-    //  $("#result").text(data.result)
-    //})
+      }
     $.ajax({
       type: 'POST',
       contentType: 'application/json',

@@ -9,18 +9,10 @@ mongo = PyMongo(app)
 @app.route('/', methods=['POST', 'GET'])
 def hello_world():
     if request.method == 'GET':
-        return render_template("index.html") # post=helloDb
+        return render_template("index.html")
 
 @app.route('/saveSnippet', methods=['POST'])
 def saveSnippet():
-    #username = request.args.get('username')
-    #password = request.args.get('password')
-    #dataPayload = request.args.get('dataPayload')
-    #editorMode = request.args.get('editorMode')
-    #methodType = request.args.get('methodType')
-    #url = request.args.get('url')
-    #fullString = username + ' ' + password + ' ' + dataPayload + ' ' + editorMode + ' ' + methodType + ' ' + url
-    #return jsonify(result=fullString)
     data = request.get_json()
     print data
     curlCommandDb = mongo.db.savedCurls.insert_one(data).inserted_id
