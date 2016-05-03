@@ -31,7 +31,7 @@ def saveSnippet():
 @app.route('/success', methods=['GET'])
 def success():
     print "Im here"
-    return render_template("templates/success.html")
+    return render_template("success.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
