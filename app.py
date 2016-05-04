@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, send_file
+from flask import render_template, send_file, url_for, abort
 from flask.ext.pymongo import PyMongo
 from flask import request, jsonify
 from datetime import datetime
@@ -26,7 +26,8 @@ def saveSnippet():
     curlCommandDb = mongo.db.savedCurls.insert_one(data).inserted_id
     print curlCommandDb
     print mongo.db.savedCurls.count()
-    return redirect("http://127.0.0.1:5000/success", code=302) #http://127.0.0.1:5000/success
+    return redirect('/success')
+    #return redirect("http://127.0.0.1:5000/success", code=303) #http://127.0.0.1:5000/success
 
 @app.route('/success', methods=['GET'])
 def success():
