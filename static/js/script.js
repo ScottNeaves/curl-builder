@@ -98,6 +98,7 @@ function ViewModel() {
         url: '/saveSnippet',
         success: function(response){
           console.log(response)
+          window.history.pushState("", "", "/"+ response.code)
         },
         error: function(){
           console.log("error occurred")

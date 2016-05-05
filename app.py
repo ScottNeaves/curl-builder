@@ -23,7 +23,7 @@ def saveSnippet():
     curlCommandDb = mongo.db.savedCurls.insert_one(data).inserted_id
     print curlCommandDb
     print mongo.db.savedCurls.count()
-    return '{"hello":"world"}'
+    return json.dumps({'code': data.get("randInt")});
     #return "{'dataLoad': 'data'}"
     #return redirect("http://127.0.0.1:5000/success", code=303) #http://127.0.0.1:5000/success
 
