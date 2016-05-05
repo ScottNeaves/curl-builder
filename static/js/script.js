@@ -65,35 +65,44 @@ function ViewModel() {
 
   self.saveSnip = function() {
     var qpms = []
-    for(var i = 0; i < self.queryParams().length; i++) {
-      qpms.push({key: self.queryParams()[i].key(), value: self.queryParams()[i].value()})
+    for (var i = 0; i < self.queryParams().length; i++) {
+      qpms.push({
+        key: self.queryParams()[i].key(),
+        value: self.queryParams()[i].value()
+      })
     }
     console.log("qpms " + qpms[0].key)
     var hdrs = []
-    for(var i = 0; i < self.headers().length; i++) {
-      hdrs.push({key: self.headers()[i].key(), value: self.headers()[i].value()})
+    for (var i = 0; i < self.headers().length; i++) {
+      hdrs.push({
+        key: self.headers()[i].key(),
+        value: self.headers()[i].value()
+      })
     }
     console.log("hdrs " + hdrs[0].key)
     var dataObject = {
-        headers: hdrs,
-        queryParameters: qpms,
-        username: self.username(),
-        password: self.password(),
-        dataPayload: self.dataPayload(),
-        editorMode: self.editorMode(),
-        methodType: self.methodType(),
-        url: self.url()
-      }
+      headers: hdrs,
+      queryParameters: qpms,
+      username: self.username(),
+      password: self.password(),
+      dataPayload: self.dataPayload(),
+      editorMode: self.editorMode(),
+      methodType: self.methodType(),
+      url: self.url()
+    }
     $.ajax({
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(dataObject),
-      dataType: 'json',
-      url: '/saveSnippet',
-      success: function(e) {
-        console.log(e);
-      }
-    });
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(dataObject),
+        dataType: 'json',
+        url: '/saveSnippet',
+        success: function(response){
+          console.log(response)
+        },
+        error: function(){
+          console.log("error occurred")
+        }
+      });
 
   }
 

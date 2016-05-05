@@ -19,14 +19,12 @@ def hello_world():
 def saveSnippet():
     data = request.get_json()
     data['randInt'] = randint(100000, 999999)
-    #Add random code
-    #randIdentifier = randint(100000, 999999)
-    #data.randIdentifier = randIdentifier
     print data
     curlCommandDb = mongo.db.savedCurls.insert_one(data).inserted_id
     print curlCommandDb
     print mongo.db.savedCurls.count()
-    return redirect('/success')
+    return '{"hello":"world"}'
+    #return "{'dataLoad': 'data'}"
     #return redirect("http://127.0.0.1:5000/success", code=303) #http://127.0.0.1:5000/success
 
 @app.route('/success', methods=['GET'])
