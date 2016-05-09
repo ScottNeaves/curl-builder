@@ -1,28 +1,3 @@
-function checkForData() {
-  $(document).ready(function() {
-    console.log("In function")
-    url = document.URL
-    var code = url.substr(url.length - 6);
-    isACode = true;
-    for (var i = 0; i < code.length; i++) {
-      if (!$.isNumeric(code[i])) {
-        //there is no code in the url.
-        isACode = false;
-        break;
-      }
-    }
-    //Get JSON related to the code
-    if (isACode == true) {
-      console.log('I got here')
-      $.post('/' + code, function(data) {
-        alert("Im here")
-        console.log(data)
-        console.log(data[0].username)
-      });
-    }
-  });
-}
-
 checkForData();
 
 var editor = ace.edit("editor")
@@ -195,6 +170,30 @@ function ViewModel() {
   self.queryParams.removeQueryParam = function() {
     self.queryParams.remove(this)
   }
+
+  function checkForData() {
+    $(document).ready(function() {
+      console.log("In function")
+      url = document.URL
+      var code = url.substr(url.length - 6);
+      isACode = true;
+      for (var i = 0; i < code.length; i++) {
+        if (!$.isNumeric(code[i])) {
+          //there is no code in the url.
+          isACode = false;
+          break;
+        }
+      }
+      //Get JSON related to the code
+      if (isACode == true) {
+        console.log('I got here')
+        $.post('/' + code, function(data) {
+          var curl = JSON.parse(data)
+        });
+      }
+    });
+  }
+
 
 };
 
