@@ -5,6 +5,8 @@ from flask import request, jsonify
 from datetime import datetime
 from random import randint
 import json
+import bson
+from bson.json_util import dumps
 from flask import redirect
 app = Flask(__name__)
 mongo = PyMongo(app)
@@ -33,18 +35,20 @@ def success():
 @app.route('/getCurl', methods=['GET'])
 def getCurl():
     #Search for the code in the collection
-    mongo.db.savedCurls.find_one({"randInt": ""})
-    return '{"hi":there}'
+    code = request.data
+    curl = mongo.db.savedCurls.find_one({"randInt": code})
+    return bson.json_util.dumps(curl)
 
 #Write an endpoint /<abc123> that searches for the code in the collection and returns
 #it to the client which then displays it in the form.
-@app.route('/<int:code>')
+@app.route('/<int:code>', methods=['POST', 'GET'])
 def loadCurl(code):
-    print code
-    curl = mongo.db.savedCurls.find_one({"randInt": '\"'+str(code)+'\"'})
-    return curl
-    #send json object of the curl to the javascript.
-    #Javascript runs function to change all the observables to appropriate values?
+    if request.method =='GET':
+        return render_template("index.html")
+    if request.method == 'POST':
+        print code
+        curl = mongo.db.savedCurls.find_one({"randInt": code})
+        return bson.json_util.dumps(curl)
 
 if __name__ == '__main__':
     app.run(debug=True)

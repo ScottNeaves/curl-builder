@@ -1,5 +1,6 @@
 function checkForData() {
   $(document).ready(function() {
+    console.log("In function")
     url = document.URL
     var code = url.substr(url.length - 6);
     isACode = true;
@@ -8,13 +9,16 @@ function checkForData() {
         //there is no code in the url.
         isACode = false;
         break;
-      } else {
-        //Get JSON related to the code
-        console.log('I got here')
-        $.get('/' + url, function(data) {
-          console.log(data)
-        });
       }
+    }
+    //Get JSON related to the code
+    if (isACode == true) {
+      console.log('I got here')
+      $.post('/' + code, function(data) {
+        alert("Im here")
+        console.log(data)
+        console.log(data[0].username)
+      });
     }
   });
 }
@@ -94,7 +98,6 @@ function ViewModel() {
         value: self.queryParams()[i].value()
       })
     }
-    console.log("qpms " + qpms[0].key)
     var hdrs = []
     for (var i = 0; i < self.headers().length; i++) {
       hdrs.push({
@@ -102,7 +105,6 @@ function ViewModel() {
         value: self.headers()[i].value()
       })
     }
-    console.log("hdrs " + hdrs[0].key)
     var dataObject = {
       headers: hdrs,
       queryParameters: qpms,
@@ -120,7 +122,6 @@ function ViewModel() {
       dataType: 'json',
       url: '/saveSnippet',
       success: function(response) {
-        console.log(response)
         window.history.pushState("", "", "/" + response.code)
       },
       error: function() {
