@@ -1,5 +1,3 @@
-checkForData();
-
 var editor = ace.edit("editor")
 editor.setTheme("ace/theme/chrome")
 editor.getSession().setMode("ace/mode/javascript");
@@ -189,11 +187,20 @@ function ViewModel() {
         console.log('I got here')
         $.post('/' + code, function(data) {
           var curl = JSON.parse(data)
+          console.log(curl)
+          self.url(curl.url)
+          self.dataPayload(curl.dataPayload)
+          self.editorMode(curl.editorMode)
+          self.methodType(curl.methodType)
+          self.username(curl.username)
+          self.password(curl.password)
+          //Headers, query parameters, and dataPayload don't work right now
         });
       }
     });
   }
 
+  checkForData();
 
 };
 
