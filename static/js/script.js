@@ -11,7 +11,7 @@ function checkForData() {
       } else {
         //Get JSON related to the code
         console.log('I got here')
-        $.get('/getCurl', function(data) {
+        $.get('/' + url, function(data) {
           console.log(data)
         });
       }

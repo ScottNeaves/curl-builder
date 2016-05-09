@@ -24,8 +24,6 @@ def saveSnippet():
     print curlCommandDb
     print mongo.db.savedCurls.count()
     return json.dumps({'code': data.get("randInt")});
-    #return "{'dataLoad': 'data'}"
-    #return redirect("http://127.0.0.1:5000/success", code=303) #http://127.0.0.1:5000/success
 
 @app.route('/success', methods=['GET'])
 def success():
@@ -34,13 +32,17 @@ def success():
 
 @app.route('/getCurl', methods=['GET'])
 def getCurl():
+    #Search for the code in the collection
+    mongo.db.savedCurls.find_one({"randInt": ""})
     return '{"hi":there}'
 
 #Write an endpoint /<abc123> that searches for the code in the collection and returns
 #it to the client which then displays it in the form.
-@app.route('/309440')
-def loadCurl():
-    return render_template("index.html")
+@app.route('/<int:code>')
+def loadCurl(code):
+    print code
+    curl = mongo.db.savedCurls.find_one({"randInt": '\"'+str(code)+'\"'})
+    return curl
     #send json object of the curl to the javascript.
     #Javascript runs function to change all the observables to appropriate values?
 
