@@ -32,5 +32,17 @@ def success():
     print "Im here"
     return render_template("success.html")
 
+@app.route('/getCurl', methods=['GET'])
+def getCurl():
+    return '{"hi":there}'
+
+#Write an endpoint /<abc123> that searches for the code in the collection and returns
+#it to the client which then displays it in the form.
+@app.route('/309440')
+def loadCurl():
+    return render_template("index.html")
+    #send json object of the curl to the javascript.
+    #Javascript runs function to change all the observables to appropriate values?
+
 if __name__ == '__main__':
     app.run(debug=True)

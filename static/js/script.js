@@ -1,3 +1,26 @@
+function checkForData() {
+  $(document).ready(function() {
+    url = document.URL
+    var code = url.substr(url.length - 6);
+    isACode = true;
+    for (var i = 0; i < code.length; i++) {
+      if (!$.isNumeric(code[i])) {
+        //there is no code in the url.
+        isACode = false;
+        break;
+      } else {
+        //Get JSON related to the code
+        console.log('I got here')
+        $.get('/getCurl', function(data) {
+          console.log(data)
+        });
+      }
+    }
+  });
+}
+
+checkForData();
+
 var editor = ace.edit("editor")
 editor.setTheme("ace/theme/chrome")
 editor.getSession().setMode("ace/mode/javascript");
@@ -91,19 +114,19 @@ function ViewModel() {
       url: self.url()
     }
     $.ajax({
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(dataObject),
-        dataType: 'json',
-        url: '/saveSnippet',
-        success: function(response){
-          console.log(response)
-          window.history.pushState("", "", "/"+ response.code)
-        },
-        error: function(){
-          console.log("error occurred")
-        }
-      });
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(dataObject),
+      dataType: 'json',
+      url: '/saveSnippet',
+      success: function(response) {
+        console.log(response)
+        window.history.pushState("", "", "/" + response.code)
+      },
+      error: function() {
+        console.log("error occurred")
+      }
+    });
 
   }
 
