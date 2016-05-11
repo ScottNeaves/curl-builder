@@ -5,10 +5,10 @@ editor.setOption("showPrintMargin", false)
 var editorContent = ""
 
 var AnimalDict = {
-  "dog": ['terrier', 'Schnauzer', 'great-dane', 'beagle'],
-  "cat": ['tabby', 'Siamese', 'Garfield'],
-  "bird": ['Parrot', 'Peregrin-Falcon', 'Hawk'],
-  "hamster": ['Weebly', 'Woobly', 'Feeny']
+  "Content-Type": ['application/json', 'application/xml', 'text/html', 'text/plain', 'text/xml'],
+  "Authorization": ['Bearer'],
+  "Accept": ['application/json', 'application/xml', 'text/html', 'text/plain', 'text/xml'],
+  "Accept_Language": ['en-US']
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
