@@ -194,6 +194,23 @@ function ViewModel() {
           self.methodType(curl.methodType)
           self.username(curl.username)
           self.password(curl.password)
+          console.log(curl.headers.length)
+          for (var i = 0; i < curl.headers.length; i++) {
+            self.headers().push({
+              key: ko.observable(curl.headers[i].key),
+              value: ko.observable(curl.headers[i].value)
+            })
+            console.log('key is ' + curl.headers[i].key)
+            console.log('value is ' + curl.headers[i].value)
+          }
+          for (var i = 0; i < curl.queryParameters.length; i++) {
+            self.queryParams().push({
+              key: ko.observable(curl.queryParameters[i].key),
+              value: ko.observable(curl.queryParameters[i].value)
+            })
+            console.log('qpms key is ' + curl.queryParameters[i].key)
+            console.log('qpms value is ' + curl.queryParameters[i].value)
+          }
           //Headers, query parameters, and dataPayload don't work right now
         });
       }

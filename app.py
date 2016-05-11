@@ -13,6 +13,10 @@ mongo = PyMongo(app)
 
 
 @app.route('/', methods=['GET'])
+def hello_world_home():
+    if request.method == 'GET':
+        return render_template("index.html")
+
 @app.route('/<int:code>', methods=['GET'])
 def hello_world(code):
     if request.method == 'GET':
