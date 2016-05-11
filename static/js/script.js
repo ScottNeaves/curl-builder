@@ -185,7 +185,7 @@ function ViewModel() {
       //Get JSON related to the code
       if (isACode == true) {
         console.log('I got here')
-        $.post('/' + code, function(data) {
+        $.post('/retrieveSnippet/' + code, function(data) {
           var curl = JSON.parse(data)
           console.log(curl)
           self.url(curl.url)
