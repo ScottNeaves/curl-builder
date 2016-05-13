@@ -43,7 +43,7 @@ function ViewModel() {
   editor.getSession().on('change', function(e) {
     editorContent = editor.getValue()
     self.editorContentObservable(editorContent)
-    editorContent = editorContent.replace(/[\n\t]/g, '');
+    editorContent = editorContent.replace(/[\n\t ]/g, '');
     self.editorContentObservable(editorContent)
     if (self.editorContentObservable() != '') {
       self.editorContentObservable('--data ' + self.editorContentObservable())
@@ -52,6 +52,7 @@ function ViewModel() {
   self.formatText = function() {
     if (self.editorMode() == 'json') {
       editor.setValue(JSON.stringify(JSON.parse(editorContent), null, '\t'));
+      //editor.setValue(vkbeautify.json(editorContent));
     }
     if (self.editorMode() == 'xml') {
       editor.setValue(vkbeautify.xml(editorContent));
@@ -153,8 +154,6 @@ function ViewModel() {
   self.headers.removeHeader = function() {
     self.headers.remove(this)
   }
-
-
 
   self.queryParams.addQueryParam = function() {
     self.queryParams.push({
