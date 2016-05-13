@@ -12,7 +12,6 @@ var AnimalDict = {
 };
 
 var methodTypes = ['GET', 'PUT', 'POST', 'DELETE']
-  //var editorModes = ['text', 'json', 'xml']
 
 var editorModes = [{
   value: 'text',
@@ -83,7 +82,7 @@ function ViewModel() {
       queryParameters: qpms,
       username: self.username(),
       password: self.password(),
-      dataPayload: self.dataPayload(),
+      dataPayload: editorContent,
       editorMode: self.editorMode(),
       methodType: self.methodType(),
       url: self.url()
@@ -188,20 +187,22 @@ function ViewModel() {
           var curl = JSON.parse(data)
           console.log(curl)
           self.url(curl.url)
-          self.dataPayload(curl.dataPayload)
           self.editorMode(curl.editorMode)
           self.methodType(curl.methodType)
           self.username(curl.username)
           self.password(curl.password)
-          console.log(curl.headers.length)
+          //editorContent = curl.dataPayload
+          editor.setValue(curl.dataPayload)
+          //console.log('editorContent is now: ' + editorContent)
+          //console.log(curl.headers.length)
           self.headers().pop()
           for (var i = 0; i < curl.headers.length; i++) {
             self.headers.push({
               key: ko.observable(curl.headers[i].key),
               value: ko.observable(curl.headers[i].value)
             })
-            console.log('hdrs key is ' + curl.headers[i].key)
-            console.log('hdrs value is ' + curl.headers[i].value)
+            //console.log('hdrs key is ' + curl.headers[i].key)
+            //console.log('hdrs value is ' + curl.headers[i].value)
           }
           self.queryParams().pop()
           for (var i = 0; i < curl.queryParameters.length; i++) {
@@ -209,8 +210,8 @@ function ViewModel() {
               key: ko.observable(curl.queryParameters[i].key),
               value: ko.observable(curl.queryParameters[i].value)
             })
-            console.log('qpms key is ' + curl.queryParameters[i].key)
-            console.log('qpms value is ' + curl.queryParameters[i].value)
+            //console.log('qpms key is ' + curl.queryParameters[i].key)
+            //console.log('qpms value is ' + curl.queryParameters[i].value)
           }
           //Headers, query parameters, and dataPayload don't work right now
         });
