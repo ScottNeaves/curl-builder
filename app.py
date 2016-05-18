@@ -6,6 +6,7 @@ from datetime import datetime
 from random import randint
 import json
 import bson
+import os
 from bson.json_util import dumps
 from flask import redirect
 app = Flask(__name__)
@@ -41,5 +42,5 @@ def loadCurl(code):
         curl = mongo.db.savedCurls.find_one({"randInt": code})
         return bson.json_util.dumps(curl)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+port = int(os.environ.get("PORT", 5000))
+app.run(debug=True, host='0.0.0.0', port = port)
