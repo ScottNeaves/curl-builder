@@ -6,8 +6,8 @@
     "email": "sune@we-knowhow.dk"
   },
   "scripts": {
-    "postinstall": "./bower install",
-    "test": "mocha-phantomjs test/index.html"
+    "test": "mocha-phantomjs test/index.html",
+    "postinstall": "bower install"
   },
   "devDependencies": {
     "mocha": "2.3.2",
