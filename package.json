@@ -6,7 +6,7 @@
     "email": "sune@we-knowhow.dk"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
+    "postinstall": "./bower install",
     "test": "mocha-phantomjs test/index.html"
   },
   "devDependencies": {
