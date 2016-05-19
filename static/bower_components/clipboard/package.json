@@ -1,0 +1,35 @@
+{
+  "name": "clipboard",
+  "version": "1.0.0",
+  "description": "Modern copy to clipboard. No Flash. Just 2kb",
+  "repository": "zenorocha/clipboard.js",
+  "main": "src/clipboard.js",
+  "license": "MIT",
+  "keywords": [
+    "clipboard",
+    "copy",
+    "cut"
+  ],
+  "dependencies": {
+    "delegate-events": "^1.1.1",
+    "tiny-emitter": "^1.0.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "browserify": "^11.1.0",
+    "karma": "^0.13.10",
+    "karma-browserify": "^4.3.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-sinon": "^1.0.4",
+    "phantomjs-polyfill": "0.0.1",
+    "uglify": "^0.1.5"
+  },
+  "scripts": {
+    "publish": "npm run build && npm run minify",
+    "build": "browserify src/clipboard.js -t [babelify --loose all] -o dist/clipboard.min.js",
+    "minify": "uglify -s dist/clipboard.min.js -o dist/clipboard.min.js",
+    "test": "karma start --single-run"
+  }
+}
