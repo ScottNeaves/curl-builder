@@ -27,10 +27,10 @@ def hello_world(code):
 def saveSnippet():
     data = request.get_json()
     data['randInt'] = randint(100000, 999999)
-    print data
+    #print data
     curlCommandDb = mongo.db.savedCurls.insert_one(data).inserted_id
-    print curlCommandDb
-    print mongo.db.savedCurls.count()
+    #print curlCommandDb
+    #print mongo.db.savedCurls.count()
     return json.dumps({'code': data.get("randInt")});
 
 #Write an endpoint /<abc123> that searches for the code in the collection and returns
