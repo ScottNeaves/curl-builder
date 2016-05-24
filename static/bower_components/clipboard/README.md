@@ -1,14 +1,15 @@
 # clipboard.js
 
 [![Build Status](http://img.shields.io/travis/zenorocha/clipboard.js/master.svg?style=flat)](https://travis-ci.org/zenorocha/clipboard.js)
+![Killing Flash](https://img.shields.io/badge/killing-flash-brightgreen.svg?style=flat)
 
-> Modern copy to clipboard. No Flash. Just 2kb
+> Modern copy to clipboard. No Flash. Just 3kb gzipped.
 
-<a href="http://zenorocha.github.io/clipboard.js/"><img width="728" src="https://cloud.githubusercontent.com/assets/398893/9983535/5ab0a950-5fb4-11e5-9602-e73c0b661883.jpg" alt="Demo"></a>
+<a href="http://clipboardjs.com/"><img width="728" src="https://cloud.githubusercontent.com/assets/398893/9983535/5ab0a950-5fb4-11e5-9602-e73c0b661883.jpg" alt="Demo"></a>
 
 ## Why
 
-Copy text to the clipboard shouldn't be hard. It shouldn't require dozens of steps to configure or hundreds of KBs to load. But most of all, it shouldn't depend on Flash or any bloated framework.
+Copying text to the clipboard shouldn't be hard. It shouldn't require dozens of steps to configure or hundreds of KBs to load. But most of all, it shouldn't depend on Flash or any bloated framework.
 
 That's why clipboard.js exists.
 
@@ -30,13 +31,13 @@ If you're not into package management, just [download a ZIP](https://github.com/
 
 ## Setup
 
-First, include the script located on the `dist` folder
+First, include the script located on the `dist` folder or load it from [a third-party CDN provider](https://github.com/zenorocha/clipboard.js/wiki/CDN-Providers).
 
 ```html
 <script src="dist/clipboard.min.js"></script>
 ```
 
-Now, you need to instantiate it using a DOM selector. This selector corresponds to the trigger element(s), for example `<button class="btn">`.
+Now, you need to instantiate it by [passing a DOM selector](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-selector.html#L18), [HTML element](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-node.html#L16-L17), or [list of HTML elements](https://github.com/zenorocha/clipboard.js/blob/master/demo/constructor-nodelist.html#L18-L19).
 
 ```js
 new Clipboard('.btn');
@@ -52,36 +53,36 @@ We're living a _declarative renaissance_, that's why we decided to take advantag
 
 ### Copy text from another element
 
-A pretty common use case is to copy content from another element. You can do that by adding a `data-target` attribute in your trigger element.
+A pretty common use case is to copy content from another element. You can do that by adding a `data-clipboard-target` attribute in your trigger element.
 
-The value you include on this attribute needs to match another's element `id` attribute.
+The value you include on this attribute needs to match another's element selector.
 
-<a href="http://zenorocha.github.io/clipboard.js/#demo-target"><img width="473" alt="example-2" src="https://cloud.githubusercontent.com/assets/398893/9983467/a4946aaa-5fb1-11e5-9780-f09fcd7ca6c8.png"></a>
+<a href="http://clipboardjs.com/#example-target"><img width="473" alt="example-2" src="https://cloud.githubusercontent.com/assets/398893/9983467/a4946aaa-5fb1-11e5-9780-f09fcd7ca6c8.png"></a>
 
 ```html
 <!-- Target -->
 <input id="foo" value="https://github.com/zenorocha/clipboard.js.git">
 
 <!-- Trigger -->
-<button class="btn" data-target="foo">
+<button class="btn" data-clipboard-target="#foo">
     <img src="assets/clippy.svg" alt="Copy to clipboard">
 </button>
 ```
 
 ### Cut text from another element
 
-Additionally, you can define a `data-action` attribute to specify if you want to either `copy` or `cut` content.
+Additionally, you can define a `data-clipboard-action` attribute to specify if you want to either `copy` or `cut` content.
 
 If you omit this attribute, `copy` will be used by default.
 
-<a href="http://zenorocha.github.io/clipboard.js/#demo-action"><img width="473" alt="example-3" src="https://cloud.githubusercontent.com/assets/398893/10000358/7df57b9c-6050-11e5-9cd1-fbc51d2fd0a7.png"></a>
+<a href="http://clipboardjs.com/#example-action"><img width="473" alt="example-3" src="https://cloud.githubusercontent.com/assets/398893/10000358/7df57b9c-6050-11e5-9cd1-fbc51d2fd0a7.png"></a>
 
 ```html
 <!-- Target -->
 <textarea id="bar">Mussum ipsum cacilds...</textarea>
 
 <!-- Trigger -->
-<button class="btn" data-action="cut" data-target="bar">
+<button class="btn" data-clipboard-action="cut" data-clipboard-target="#bar">
     Cut to clipboard
 </button>
 ```
@@ -90,13 +91,13 @@ As you may expect, the `cut` action only works on `<input>` or `<textarea>` elem
 
 ### Copy text from attribute
 
-Truth is, you don't even need another element to copy its content from. You can just include a `data-text` attribute in your trigger element.
+Truth is, you don't even need another element to copy its content from. You can just include a `data-clipboard-text` attribute in your trigger element.
 
-<a href="http://zenorocha.github.io/clipboard.js/#demo-text"><img width="147" alt="example-1" src="https://cloud.githubusercontent.com/assets/398893/10000347/6e16cf8c-6050-11e5-9883-1c5681f9ec45.png"></a>
+<a href="http://clipboardjs.com/#example-text"><img width="147" alt="example-1" src="https://cloud.githubusercontent.com/assets/398893/10000347/6e16cf8c-6050-11e5-9883-1c5681f9ec45.png"></a>
 
 ```html
 <!-- Trigger -->
-<button class="btn" data-text="Just because you can doesn't mean you should — clipboard.js">
+<button class="btn" data-clipboard-text="Just because you can doesn't mean you should — clipboard.js">
     Copy to clipboard
 </button>
 ```
@@ -124,13 +125,44 @@ clipboard.on('error', function(e) {
 });
 ```
 
-For a live demonstration, open this [site](http://zenorocha.github.io/clipboard.js/) and just your console :)
+For a live demonstration, open this [site](http://clipboardjs.com/) and just your console :)
+
+## Advanced Options
+
+If you don't want to modify your HTML, there's a pretty handy imperative API for you to use. All you need to do is declare a function, do your thing, and return a value.
+
+For instance, if you want to dynamically set a `target`, you'll need to return a Node.
+
+```js
+new Clipboard('.btn', {
+    target: function(trigger) {
+        return trigger.nextElementSibling;
+    }
+});
+```
+
+If you want to dynamically set a `text`, you'll return a String.
+
+```js
+new Clipboard('.btn', {
+    text: function(trigger) {
+        return trigger.getAttribute('aria-label');
+    }
+});
+```
+
+Also, if you are working with single page apps, you may want to manage the lifecycle of the DOM more precisely. Here's how you clean up the events and objects that we create.
+
+```js
+var clipboard = new Clipboard('.btn');
+clipboard.destroy();
+```
 
 ## Browser Support
 
 This library relies on both [Selection](https://developer.mozilla.org/en-US/docs/Web/API/Selection) and [execCommand](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand) APIs. The second one is supported in the following browsers.
 
-| <img src="http://zenorocha.github.io/clipboard.js/assets/images/chrome.png" width="48px" height="48px" alt="Chrome logo"> | <img src="http://zenorocha.github.io/clipboard.js/assets/images/firefox.png" width="48px" height="48px" alt="Firefox logo"> | <img src="http://zenorocha.github.io/clipboard.js/assets/images/ie.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="http://zenorocha.github.io/clipboard.js/assets/images/opera.png" width="48px" height="48px" alt="Opera logo"> | <img src="http://zenorocha.github.io/clipboard.js/assets/images/safari.png" width="48px" height="48px" alt="Safari logo"> |
+| <img src="http://clipboardjs.com/assets/images/chrome.png" width="48px" height="48px" alt="Chrome logo"> | <img src="http://clipboardjs.com/assets/images/firefox.png" width="48px" height="48px" alt="Firefox logo"> | <img src="http://clipboardjs.com/assets/images/ie.png" width="48px" height="48px" alt="Internet Explorer logo"> | <img src="http://clipboardjs.com/assets/images/opera.png" width="48px" height="48px" alt="Opera logo"> | <img src="http://clipboardjs.com/assets/images/safari.png" width="48px" height="48px" alt="Safari logo"> |
 |:---:|:---:|:---:|:---:|:---:|
 | 42+ ✔ | 41+ ✔ | 9+ ✔ | 29+ ✔ | Nope ✘ |
 
@@ -138,7 +170,7 @@ Although copy/cut operations with [execCommand](https://developer.mozilla.org/en
 
 That means you can show a tooltip saying `Copied!` when `success` event is called and `Press Ctrl+C to copy` when `error` event is called because the text is already selected.
 
-For a live demonstration, open this [site](http://zenorocha.github.io/clipboard.js/) on Safari.
+For a live demonstration, open this [site](http://clipboardjs.com) on Safari.
 
 ## License
 

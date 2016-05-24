@@ -1,9 +1,19 @@
 {
   "name": "clipboard",
-  "version": "1.0.0",
+  "version": "1.5.10",
   "description": "Modern copy to clipboard. No Flash. Just 2kb",
   "license": "MIT",
-  "main": "src/clipboard.js",
+  "main": "dist/clipboard.js",
+  "ignore": [
+    "/.*/",
+    "/demo/",
+    "/test/",
+    "/.*",
+    "/bower.json",
+    "/karma.conf.js",
+    "/src",
+    "/lib"
+  ],
   "keywords": [
     "clipboard",
     "copy",
